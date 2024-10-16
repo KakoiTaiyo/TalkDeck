@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-   use HasFactory;
+    use HasFactory;
 
     // このモデルに関連するテーブル名
     protected $table = 'users';
@@ -20,10 +20,10 @@ class User extends Model
 
     // ホワイトリスト化する属性
     protected $fillable = [
-        'user_id', 
-        'account_name', 
-        'email', 
-        'password', 
+        'user_id',
+        'account_name',
+        'email',
+        'password',
         'answer_content',
     ];
 
@@ -31,6 +31,5 @@ class User extends Model
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
-    } 
-
+    }
 }
