@@ -18,9 +18,11 @@
             {{ $users->appends(request()->input())->links() }}
         </div>
         @foreach ($users as $user)
-        <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
-            <input type="button" name="select" class="mr-2" value="選択">
-            <p class="text-gray-800 dark:text-gray-300">{{ $user->account_name }}</p>
+        <div class="flex items-center">
+            <button type="submit" class="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" onclick="fetchUserData({{ $user->id }})">
+                選択
+            </button>
+            <p>{{ $user->account_name }}</p>
         </div>
         @endforeach
         @else
@@ -30,3 +32,18 @@
         @endif
     </div>
 </div>
+
+<script>
+    function fetchUserData(userId) {
+        fetch(`/user/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // ここで取得したユーザーデータを処理します
+                alert(`ユーザー名: ${data.account_name}`);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
