@@ -19,10 +19,10 @@ class User extends Authenticatable
 
     // ホワイトリスト化する属性
     protected $fillable = [
-        'user_id', 
-        'account_name', 
-        'email', 
-        'password', 
+        'user_id',
+        'account_name',
+        'email',
+        'password',
         'answer_content',
     ];
 
@@ -30,6 +30,5 @@ class User extends Authenticatable
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
-    } 
-
+    }
 }
