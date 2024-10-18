@@ -3,7 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\GeminiController;
+use App\Http\Controllers\GeminiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,5 +21,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-// Route::get('/', [GeminiController::class, 'index']);
-// Route::post('/', [GeminiController::class, 'post']);
+
+Route::get('/gemini', [GeminiController::class, 'index']);
+Route::post('/gemini', [GeminiController::class, 'post']);
