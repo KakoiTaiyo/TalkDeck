@@ -19,9 +19,14 @@
         </div>
         @foreach ($users as $user)
         <div class="flex items-center">
-            <button type="submit" class="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" onclick="fetchUserData({{ $user->id }})">
-                選択
-            </button>
+            <!-- POSTリクエストを送信するフォーム -->
+            <form action="{{ route('gemini.show') }}" method="POST">
+                @csrf
+                <!-- ユーザIDを送信するための隠しフィールド -->
+                <input type="hidden" name="id" value="{{ $user->id }}" />
+                <button type="submit">選択</button>
+            </form>
+
             <p>{{ $user->account_name }}</p>
         </div>
         @endforeach
@@ -33,7 +38,7 @@
     </div>
 </div>
 
-<script>
+<!-- <script>
     function fetchUserData(userId) {
         fetch(`/user/${userId}`)
             .then(response => response.json())
@@ -46,4 +51,4 @@
                 console.error('Error:', error);
             });
     }
-</script>
+</script> -->

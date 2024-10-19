@@ -10,7 +10,11 @@
 
     {{-- 結果表示 --}}
     <p>（結果）</p>
-    {{ isset($response_text) ? $response_text : '' }}
+    @if (isset($response_text))
+        @markdown
+            {{ $response_text }}
+        @endmarkdown
+    @endif
 </body>
 </html>
 
