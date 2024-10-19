@@ -37,3 +37,18 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function fetchUserData(userId) {
+        fetch(`/user/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // ここで取得したユーザーデータを処理します
+                alert(`ユーザー名: ${data.account_name}`);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
