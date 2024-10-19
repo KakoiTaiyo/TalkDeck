@@ -26,11 +26,6 @@ class User extends Authenticatable
         'answer_content',
     ];
 
-    // パスワードをハッシュ化するためのアクセサ
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
     
     public function followers()
     {

@@ -10,7 +10,10 @@ class FollowController extends Controller
     public function follow($id)
     {
         $userToFollow = User::findOrFail($id);
-
+        // 自分自身をフォローできないようにする
+        if (auth()->id() == $id) {
+            return back()->with('error', '自分自身をフォローすることはできません');
+        }
         // 自分がすでにフォローしているかチェック
         if (!auth()->user()->following()->where('followed_id', $id)->exists()) {
             auth()->user()->following()->attach($userToFollow->id);
