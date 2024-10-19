@@ -15,40 +15,29 @@
                     </button>
                 </div>
             </form>
+        <!-- 検索結果表示 -->
+        @if ($users->count())
+        <!-- ページネーション -->
+        <div class="mb-4">
+            {{ $users->appends(request()->input())->links() }}
+        </div>
+        @foreach ($users as $user)
+        <div class="flex items-center">
+            <!-- POSTリクエストを送信するフォーム -->
+            <form action="{{ route('gemini.show') }}" method="POST">
+                @csrf
+                <!-- ユーザIDを送信するための隠しフィールド -->
+                <input type="hidden" name="id" value="{{ $user->id }}" />
+                <button type="submit">選択</button>
+            </form>
 
-            <!-- 検索結果表示 -->
-            @if ($users->count())
-            <!-- ページネーション -->
-            <div class="mb-4">
-                {{ $users->appends(request()->input())->links() }}
-            </div>
-            @foreach ($users as $user)
-            <div class="mb-4 p-4 bg-gray-200 dark:bg-gray-700 rounded-lg">
-                <input type="checkbox" name="select" class="mr-2" value="選択">
-                <p class="text-gray-800 dark:text-gray-300">{{ $user->account_name }}</p>
-            </div>
-            @endforeach
-            <button class="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">決定する</button>
-            @else
-            <div>
-                <p class="text-gray-800 dark:text-gray-300">ユーザーが見つかりませんでした</p>
-            </div>
-            @endif
+            <p>{{ $user->account_name }}</p>
+        </div>
+        @endforeach
+        @else
+        <div>
+            <p class="text-gray-800 dark:text-gray-300">ユーザーが見つかりませんでした</p>
+
         </div>
     </div>
 </x-app-layout>
-
-<script>
-    function fetchUserData(userId) {
-        fetch(`/user/${userId}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                // ここで取得したユーザーデータを処理します
-                alert(`ユーザー名: ${data.account_name}`);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-</script>
