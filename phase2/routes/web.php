@@ -10,6 +10,7 @@ Route::get('/', function () {
 });
 
 Route::get('/search', [UserController::class, 'search'])->name('users.search');
+Route::get('/user/{id}', [UserController::class, 'getUser'])->name('user.get');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
