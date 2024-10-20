@@ -8,6 +8,14 @@
     <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg" autofocus>
         <div class="max-w-xl">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('プロフィール情報') }}</h3>
+            <p><a href="{{ route('profile.followings', Auth::user()->id) }}" class="text-blue-500 hover:underline">
+                    {{ Auth::user()->followings()->count() }} フォロー
+                </a>
+                <a href="{{ route('profile.followers', Auth::user()->id) }}" class="text-blue-500 hover:underline">
+                    {{ Auth::user()->followers()->count() }} フォロワー
+                </a>
+            </p>
+
             <p class="mb-4 text-gray-900 dark:text-white"><strong>ユーザーID:</strong> {{ Auth::user()->user_id }}</p>
             <p class="mb-4 text-gray-900 dark:text-white"><strong>アカウント名:</strong> {{ Auth::user()->account_name }}</p>
             <p class="mb-4 text-gray-900 dark:text-white"><strong>メールアドレス:</strong> {{ Auth::user()->email }}</p>
