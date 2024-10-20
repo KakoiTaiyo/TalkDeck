@@ -7,11 +7,11 @@
 
     <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
         <div class="max-w-xl">
-            <h3 class="text-lg font-semibold">{{ __('プロフィール情報') }}</h3>
-            <p class="mb-4"><strong>ユーザーID:</strong> {{ Auth::user()->user_id }}</p>
-            <p class="mb-4"><strong>アカウント名:</strong> {{ Auth::user()->account_name }}</p>
-            <p class="mb-4"><strong>メールアドレス:</strong> {{ Auth::user()->email }}</p>
-            <p class="mb-4"><strong>回答内容:</strong> {{ Auth::user()->answer_content }}</p>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{ __('プロフィール情報') }}</h3>
+            <p class="mb-4 text-gray-900 dark:text-white"><strong>ユーザーID:</strong> {{ Auth::user()->user_id }}</p>
+            <p class="mb-4 text-gray-900 dark:text-white"><strong>アカウント名:</strong> {{ Auth::user()->account_name }}</p>
+            <p class="mb-4 text-gray-900 dark:text-white"><strong>メールアドレス:</strong> {{ Auth::user()->email }}</p>
+            <p class="mb-4 text-gray-900 dark:text-white"><strong>回答内容:</strong> {{ Auth::user()->answer_content }}</p>
         </div>
     </div>
 

@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                         {{ __('Profile') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('users.search')" :active="request()->routeIs('tweets.search')">
+                    <x-nav-link :href="route('users.search')" :active="request()->routeIs('users.search')">
                         {{ __('ユーザー検索') }}
                     </x-nav-link>
                 </div>
@@ -79,7 +79,7 @@
             <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                 {{ __('Profile') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('users.search')" :active="request()->routeIs('tweets.search')">
+            <x-responsive-nav-link :href="route('users.search')" :active="request()->routeIs('users.search')">
                 {{ __('ユーザー検索') }}
             </x-responsive-nav-link>
         </div>
