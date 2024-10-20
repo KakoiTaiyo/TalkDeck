@@ -19,8 +19,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/gemini', [GeminiController::class, 'show'])->name('gemini.show');
     Route::get('/search', [UserController::class, 'search'])->name('users.search');
-    Route::get('/user/{id}', [UserController::class, 'getUser'])->name('user.get');
-
 });
 
 require __DIR__ . '/auth.php';

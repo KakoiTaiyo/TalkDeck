@@ -79,10 +79,4 @@ class UserController extends Controller
 
         return view('users.search', compact('users'));
     }
-
-    public function getUser($id)
-    {
-        $user = User::find($id);
-        return response()->json($user);
-    }
 }
