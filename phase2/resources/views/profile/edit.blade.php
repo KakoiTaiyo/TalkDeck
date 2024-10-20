@@ -33,7 +33,8 @@
                         @csrf
                         <div class="mb-4">
                             <label for="answer_content" class="block text-sm font-medium text-gray-700">回答内容変更</label>
-                            <textarea id="answer_content" name="answer_content" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50"></textarea>
+                            <textarea id="answer_content" name="answer_content" rows="3" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full">
+                            </textarea>
                         </div>
                         <button type="submit" class="px-4 py-2 bg-blue-500 text-black rounded-lg">更新</button>
                     </form>
