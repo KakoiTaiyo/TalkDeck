@@ -33,8 +33,9 @@
                             選択
                         </button>
                     </form>
-                    <!-- フォローボタン -->
-                    @if (auth()->user() && auth()->user()->id !== $user->id)
+                    <!-- アカウント名をクリックするとそのユーザーのマイページへ -->
+                    <!-- 認証ユーザーが自分自身でない場合のみフォローボタンを表示 -->
+                    @if (Auth::id() !== $user->id)
                     @if (auth()->user()->following()->where('followed_id', $user->id)->exists())
                     <form action="{{ route('unfollow', $user->id) }}" method="POST">
                         @csrf
@@ -45,14 +46,16 @@
                     @else
                     <form action="{{ route('follow', $user->id) }}" method="POST">
                         @csrf
-                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        <button type="submit" class="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700">
                             フォロー
                         </button>
                     </form>
                     @endif
                     @endif
                 </div>
-                <p class="text-gray-800 dark:text-gray-300 text-lg">{{ $user->account_name }}</p>
+                <form action="{{ route('mypage', $user->id) }}" method="GET">
+                    <button type="submit" class="dark:text-gray-300 text-lg text-blue-500 hover:underline">{{ $user->account_name }}</button>
+                </form>
             </div>
             @endforeach
             @else
