@@ -3,12 +3,19 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\GeminiController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/search', [UserController::class, 'search'])->name('users.search');
+Route::middleware('auth')->group(function () {
+    Route::post('/follow/{id}', [FollowController::class, 'follow'])->name('follow');
+    Route::post('/unfollow/{id}', [FollowController::class, 'unfollow'])->name('unfollow');
+});
+Route::get('/user/{id}', [UserController::class, 'getUser'])->name('user.get');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -22,5 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{id}', [UserController::class, 'getUser'])->name('user.get');
 
 });
+
 
 require __DIR__ . '/auth.php';

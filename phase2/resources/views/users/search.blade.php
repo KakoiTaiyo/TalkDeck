@@ -15,29 +15,50 @@
                     </button>
                 </div>
             </form>
-        <!-- 検索結果表示 -->
-        @if ($users->count())
-        <!-- ページネーション -->
-        <div class="mb-4">
-            {{ $users->appends(request()->input())->links() }}
-        </div>
-        @foreach ($users as $user)
-        <div class="flex items-center">
-            <!-- POSTリクエストを送信するフォーム -->
-            <form action="{{ route('gemini.show') }}" method="POST">
-                @csrf
-                <!-- ユーザIDを送信するための隠しフィールド -->
-                <input type="hidden" name="id" value="{{ $user->id }}" />
-                <button type="submit">選択</button>
-            </form>
-
-            <p>{{ $user->account_name }}</p>
-        </div>
-        @endforeach
-        @else
-        <div>
-            <p class="text-gray-800 dark:text-gray-300">ユーザーが見つかりませんでした</p>
-
+            @if(session('error'))
+                <script>
+                    alert("{{ session('error') }}");
+                </script>
+            @endif
+             <!-- 検索結果表示 -->
+            @if ($users->count())
+            <!-- ページネーション -->
+            <div class="mb-4">
+                {{ $users->appends(request()->input())->links() }}
+            </div>
+            @foreach ($users as $user)
+                <div class="flex items-center">
+                    <!-- POSTリクエストを送信するフォーム -->
+                    <form action="{{ route('gemini.show') }}" method="POST">
+                        @csrf
+                        <!-- ユーザIDを送信するための隠しフィールド -->
+                        <input type="hidden" name="id" value="{{ $user->id }}" />
+                        <button type="submit">選択</button>
+                    </form>
+                    <p>{{ $user->account_name }}</p>
+                    @if (auth()->user()->following()->where('followed_id', $user->id)->exists())
+                        <form action="{{ route('unfollow', $user->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="ml-4 px-4 py-2 bg-red-500 text-black rounded-lg hover:bg-red-700">
+                                フォロー解除
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('follow', $user->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="ml-4 px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-700">
+                                フォロー
+                            </button>
+                        </form>
+                    @endif
+            </div>
+            @endforeach
+            <button class="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">決定する</button>
+            @else
+            <div>
+                <p class="text-gray-800 dark:text-gray-300">ユーザーが見つかりませんでした</p>
+            </div>
+            @endif
         </div>
     </div>
 </x-app-layout>
