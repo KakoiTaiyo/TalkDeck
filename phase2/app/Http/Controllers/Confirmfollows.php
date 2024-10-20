@@ -12,7 +12,7 @@ class Confirmfollows extends Controller
         $user = User::findOrFail($id);
         $followings = $user->followings;
 
-        return view('profile.followings', compact('followings'));
+        return view('profile.followings', compact('user','followings'));
     }
 
     public function followers($id)
@@ -20,6 +20,6 @@ class Confirmfollows extends Controller
         $user = User::findOrFail($id);
         $followers = $user->followers;
 
-        return view('profile.followers', compact('followers'));
+        return view('profile.followers', compact('user','followers'));
     }
 }

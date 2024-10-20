@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\GeminiController;
 use App\Http\Controllers\Confirmfollows;
+use App\Http\Controllers\MypageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,5 +32,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/user/{id}/followings', [Confirmfollows::class, 'followings'])->name('profile.followings');
 Route::get('/user/{id}/followers', [Confirmfollows::class, 'followers'])->name('profile.followers');
 
-
+Route::get('/mypage/{id}', [MypageController::class, 'show'])->name('mypage');
+Route::get('/mypage/{id}/followers', [Confirmfollows::class, 'followers'])->name('profile.followers');
+Route::get('/mypage/{id}/followings', [Confirmfollows::class, 'followings'])->name('profile.followings');
 require __DIR__ . '/auth.php';

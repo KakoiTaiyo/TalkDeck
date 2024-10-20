@@ -29,30 +29,33 @@
                     <!-- POSTリクエストを送信するフォーム -->
                     <form action="{{ route('gemini.show', ['id' => $user->id]) }}" method="POST">
                         @csrf
-                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                             選択
                         </button>
                     </form>
-                    <!-- フォローボタン -->
-                    @if (auth()->user() && auth()->user()->id !== $user->id)
-                    @if (auth()->user()->following()->where('followed_id', $user->id)->exists())
-                    <form action="{{ route('unfollow', $user->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-                            フォローをやめる
-                        </button>
+                    <!-- アカウント名をクリックするとそのユーザーのマイページへ -->
+                    <form action="{{ route('mypage', $user->id) }}" method="GET">
+                        <button type="submit" class="text-blue-500 hover:underline">{{ $user->account_name }}</button>
                     </form>
-                    @else
-                    <form action="{{ route('follow', $user->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                            フォロー
-                        </button>
-                    </form>
+                    <!-- 認証ユーザーが自分自身でない場合のみフォローボタンを表示 -->
+                    @if (Auth::id() !== $user->id)
+                        @if (auth()->user()->following()->where('followed_id', $user->id)->exists())
+                        <form action="{{ route('unfollow', $user->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="px-4 py-2 bg-red-500 text-black rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+                                フォローをやめる
+                            </button>
+                        </form>
+                        @else
+                            <form action="{{ route('follow', $user->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="ml-4 px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-700">
+                                    フォロー
+                                </button>
+                            </form>
+                        @endif
                     @endif
-                    @endif
-                </div>
-                <p class="text-gray-800 dark:text-gray-300 text-lg">{{ $user->account_name }}</p>
+                </div>  
             </div>
             @endforeach
             @else
