@@ -24,7 +24,7 @@
                 {{ $users->appends(request()->input())->links() }}
             </div>
             @foreach ($users as $user)
-            <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-between">
+            <div class="mb-2 p-4 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-between">
                 <!-- POSTリクエストを送信するフォーム -->
                 <form action="{{ route('gemini.show', ['id' => $user->id]) }}" method="POST">
                     @csrf
