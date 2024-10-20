@@ -62,7 +62,6 @@
             <div>
                 <p class="text-gray-800 dark:text-gray-300">ユーザーが見つかりませんでした</p>
             </div>
-            @endif
         </div>
         @endif
     </div>

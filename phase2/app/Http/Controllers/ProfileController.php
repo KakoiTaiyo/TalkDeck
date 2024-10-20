@@ -57,4 +57,17 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function updateAnswer(Request $request)
+    {
+        $request->validate([
+            'answer_content' => 'required|string|max:255',
+        ]);
+
+        $user = Auth::user();
+        $user->answer_content = $request->input('answer_content');
+        $user->save();
+
+        return redirect()->back()->with('success', '回答内容が更新されました。');
+    }
 }

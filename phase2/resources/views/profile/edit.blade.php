@@ -20,11 +20,26 @@
             <p class="mb-4 text-gray-900 dark:text-white"><strong>アカウント名:</strong> {{ Auth::user()->account_name }}</p>
             <p class="mb-4 text-gray-900 dark:text-white"><strong>メールアドレス:</strong> {{ Auth::user()->email }}</p>
             <p class="mb-4 text-gray-900 dark:text-white"><strong>回答内容:</strong> {{ Auth::user()->answer_content }}</p>
+        
         </div>
     </div>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <!-- 回答内容の更新フォーム -->
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    <form action="{{ route('profile.updateAnswer') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="answer_content" class="block text-sm font-medium text-gray-700">回答内容変更</label>
+                            <textarea id="answer_content" name="answer_content" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50"></textarea>
+                        </div>
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-black rounded-lg">更新</button>
+                    </form>
+                </div>
+            </div>
+        
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
