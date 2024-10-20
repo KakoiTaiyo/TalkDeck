@@ -32,12 +32,12 @@
                         選択
                     </button>
                 </form>
-                <p class="text-gray-800 dark:text-gray-300">{{ $user->account_name }}</p>
+                <p class="text-gray-800 dark:text-gray-300 text-lg">{{ $user->account_name }}</p>
             </div>
             @endforeach
             @else
             <div>
-                <p class="text-gray-800 dark:text-gray-300">ユーザーが見つかりませんでした</p>
+                <p class="text-gray-800 dark:text-gray-300 text-lg">ユーザーが見つかりませんでした</p>
             </div>
             @endif
         </div>
