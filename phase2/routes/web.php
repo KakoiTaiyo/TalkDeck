@@ -27,8 +27,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/gemini', [GeminiController::class, 'show'])->name('gemini.show');
     Route::get('/search', [UserController::class, 'search'])->name('users.search');
-    Route::get('/user/{id}', [UserController::class, 'getUser'])->name('user.get');
-
 });
 Route::get('/user/{id}/followings', [Confirmfollows::class, 'followings'])->name('profile.followings');
 Route::get('/user/{id}/followers', [Confirmfollows::class, 'followers'])->name('profile.followers');
