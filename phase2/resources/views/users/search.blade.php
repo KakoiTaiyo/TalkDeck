@@ -24,20 +24,40 @@
                 {{ $users->appends(request()->input())->links() }}
             </div>
             @foreach ($users as $user)
-            <div class="mb-2 p-4 bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-between">
-                <!-- POSTリクエストを送信するフォーム -->
-                <form action="{{ route('gemini.show', ['id' => $user->id]) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                        選択
-                    </button>
-                </form>
+            <div class="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-between">
+                <div class="flex space-x-4">
+                    <!-- POSTリクエストを送信するフォーム -->
+                    <form action="{{ route('gemini.show', ['id' => $user->id]) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            選択
+                        </button>
+                    </form>
+                    <!-- フォローボタン -->
+                    @if (auth()->user() && auth()->user()->id !== $user->id)
+                    @if (auth()->user()->following()->where('followed_id', $user->id)->exists())
+                    <form action="{{ route('unfollow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+                            フォローをやめる
+                        </button>
+                    </form>
+                    @else
+                    <form action="{{ route('follow', $user->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                            フォロー
+                        </button>
+                    </form>
+                    @endif
+                    @endif
+                </div>
                 <p class="text-gray-800 dark:text-gray-300 text-lg">{{ $user->account_name }}</p>
             </div>
             @endforeach
             @else
             <div>
-                <p class="text-gray-800 dark:text-gray-300 text-lg">ユーザーが見つかりませんでした</p>
+                <p class="text-gray-800 dark:text-gray-300">ユーザーが見つかりませんでした</p>
             </div>
             @endif
         </div>

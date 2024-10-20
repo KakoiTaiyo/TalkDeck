@@ -26,9 +26,14 @@ class User extends Authenticatable
         'answer_content',
     ];
 
-    // パスワードをハッシュ化するためのアクセサ
-    public function setPasswordAttribute($password)
+    
+    public function followers()
     {
-        $this->attributes['password'] = bcrypt($password);
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
     }
 }
