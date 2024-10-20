@@ -25,7 +25,7 @@
         <!-- Answer Content Input Field -->
         <div class="mt-4">
             <x-input-label for="answer_content" :value="__('Answer Content')" />
-            <textarea id="answer_content" class="block mt-1 w-full" name="answer_content" autocomplete="answer_content">{{ old('answer_content') }}</textarea>
+            <textarea id="answer_content" class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm block mt-1 w-full" name="answer_content" autocomplete="answer_content">{{ old('answer_content') }}</textarea>
             <x-input-error :messages="$errors->get('answer_content')" class="mt-2" />
         </div>
 
@@ -35,9 +35,9 @@
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+                type="password"
+                name="password"
+                required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -47,8 +47,8 @@
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                type="password"
+                name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
