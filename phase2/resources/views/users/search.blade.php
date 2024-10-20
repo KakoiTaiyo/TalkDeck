@@ -20,31 +20,37 @@
                     alert("{{ session('error') }}");
                 </script>
             @endif
-            <!-- 検索結果表示 -->
+             <!-- 検索結果表示 -->
             @if ($users->count())
             <!-- ページネーション -->
             <div class="mb-4">
                 {{ $users->appends(request()->input())->links() }}
             </div>
             @foreach ($users as $user)
-            <div class="mb-4 p-4 bg-gray-200 dark:bg-gray-700 rounded-lg">
-                <input type="checkbox" name="select" class="mr-2" value="選択">
-                <p class="text-gray-800 dark:text-gray-300">{{ $user->account_name }}</p>
-                @if (auth()->user()->following()->where('followed_id', $user->id)->exists())
-                    <form action="{{ route('unfollow', $user->id) }}" method="POST">
+                <div class="flex items-center">
+                    <!-- POSTリクエストを送信するフォーム -->
+                    <form action="{{ route('gemini.show') }}" method="POST">
                         @csrf
-                        <button type="submit" class="ml-4 px-4 py-2 bg-red-500 text-black rounded-lg hover:bg-red-700">
-                            フォロー解除
-                        </button>
+                        <!-- ユーザIDを送信するための隠しフィールド -->
+                        <input type="hidden" name="id" value="{{ $user->id }}" />
+                        <button type="submit">選択</button>
                     </form>
-                @else
-                    <form action="{{ route('follow', $user->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="ml-4 px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-700">
-                            フォロー
-                        </button>
-                    </form>
-                @endif
+                    <p>{{ $user->account_name }}</p>
+                    @if (auth()->user()->following()->where('followed_id', $user->id)->exists())
+                        <form action="{{ route('unfollow', $user->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="ml-4 px-4 py-2 bg-red-500 text-black rounded-lg hover:bg-red-700">
+                                フォロー解除
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('follow', $user->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="ml-4 px-4 py-2 bg-blue-500 text-black rounded-lg hover:bg-blue-700">
+                                フォロー
+                            </button>
+                        </form>
+                    @endif
             </div>
             @endforeach
             <button class="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">決定する</button>
@@ -56,18 +62,3 @@
         </div>
     </div>
 </x-app-layout>
-
-<script>
-    function fetchUserData(userId) {
-        fetch(`/user/${userId}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                // ここで取得したユーザーデータを処理します
-                alert(`ユーザー名: ${data.account_name}`);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-</script>
