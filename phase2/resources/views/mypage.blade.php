@@ -5,7 +5,7 @@
 
             <p class="dark:text-white"><strong>ユーザーID:</strong> {{ $user->user_id }}</p>
             <p class="dark:text-white"><strong>アカウント名:</strong> {{ $user->account_name }}</p>
-            <p class="dark:text-white"><strong>回答内容:</strong> {{ $user->answer_content }}</p>
+            <p class="dark:text-white"><strong>自己紹介:</strong> {{ $user->answer_content }}</p>
 
             <!-- フォロワー数とフォロー数 -->
             <div>
