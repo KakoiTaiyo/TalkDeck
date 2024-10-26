@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                         {{ __('Profile') }}
                     </x-nav-link>
+                     <x-nav-link :href="route('history.index')" :active="request()->routeIs('history.index')">
+                        {{ __('履歴') }}
+                    </x-nav-link>
                 </div>
             </div>
             <!-- Settings Dropdown -->
@@ -81,6 +84,10 @@
             <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
                 {{ __('Profile') }}
             </x-responsive-nav-link>
+<x-nav-link :href="route('history.index')" :active="request()->routeIs('history.index')">
+    {{ __('履歴') }}
+</x-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->
