@@ -20,7 +20,7 @@
                 <p class="mb-4 text-gray-900 dark:text-white"><strong>ユーザーID:</strong> {{ Auth::user()->user_id }}</p>
                 <p class="mb-4 text-gray-900 dark:text-white"><strong>アカウント名:</strong> {{ Auth::user()->account_name }}</p>
                 <p class="mb-4 text-gray-900 dark:text-white"><strong>メールアドレス:</strong> {{ Auth::user()->email }}</p>
-                <p class="mb-4 text-gray-900 dark:text-white"><strong>回答内容:</strong> {{ Auth::user()->answer_content }}</p>
+                <p class="mb-4 text-gray-900 dark:text-white"><strong>自己紹介:</strong> {{ Auth::user()->answer_content }}</p>
             </div>
         </div>
     </div>
