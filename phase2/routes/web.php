@@ -7,6 +7,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\GeminiController;
 use App\Http\Controllers\Confirmfollows;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\HistoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,8 +28,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/gemini', [GeminiController::class, 'show'])->name('gemini.show');
+    Route::get('/gemini', [GeminiController::class, 'show'])->name('gemini.show'); 
     Route::get('/search', [UserController::class, 'search'])->name('users.search');
 });
+
+Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+Route::post('/history/save', [HistoryController::class, 'saveHistory'])->name('history.save');
+
+
 Route::get('/user/{id}/followings', [Confirmfollows::class, 'followings'])->name('profile.followings');
 Route::get('/user/{id}/followers', [Confirmfollows::class, 'followers'])->name('profile.followers');
 
