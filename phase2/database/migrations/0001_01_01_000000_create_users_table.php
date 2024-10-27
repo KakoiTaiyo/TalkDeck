@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('account_name'); // アカウント名
             $table->string('email')->unique();
             $table->string('password');
-            $table->text('answer_content')->nullable(); // 回答内容
+            $table->text('answer_content')->nullable(); // 自己紹介
             $table->rememberToken();
             $table->timestamps();
         });
@@ -46,6 +46,5 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
-        
     }
 };

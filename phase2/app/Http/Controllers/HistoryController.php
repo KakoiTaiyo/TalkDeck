@@ -13,7 +13,7 @@ class HistoryController extends Controller
        
         $request->validate([
             'content' => 'required|string',
-            'response_text' => 'required|string',
+            
         ]);
 
         // データを保存
@@ -23,7 +23,7 @@ class HistoryController extends Controller
             'response_text' => $request->input('response_text')
         ]);
 
-        return redirect()->route('gemini.show')->with('success', 'データが保存されました！');
+         return response()->json(['message' => 'データが保存されました！']);
     }
 
     public function index()
