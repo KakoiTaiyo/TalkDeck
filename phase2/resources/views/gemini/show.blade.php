@@ -10,7 +10,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <!-- <h3>入力文: {{ $sentence }}</h3> -->
+                    <p>入力文: {!! nl2br(e($sentence)) !!}</p>
+
+                    <ul>
+                        @foreach ($answer_contents as $email)
+                            <li>{{ $email }}</li>
+                        @endforeach
+                    </ul>
+
                     {{-- 結果表示 --}}
                     @if (isset($response_text))
                         <p>{!! nl2br(e($response_text)) !!}</p>
